@@ -4,9 +4,12 @@ from bson.objectid import ObjectId # For ObjectId to work
 from bson.errors import InvalidId # For catching InvalidId exception for ObjectId
 import os
 
-mongodb_host = os.environ.get('MONGO_HOST', 'localhost')
+mongodb_host = os.environ.get('MONGO_HOST', 'test_mongodb')
 mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
-client = MongoClient(mongodb_host, mongodb_port)    #Configure the connection to the database
+print("=============")
+print(mongodb_host)
+print(mongodb_host)
+client = MongoClient(host="mongo_db", port=27017)    #Configure the connection to the database
 db = client.camp2016    #Select the database
 todos = db.todo #Select the collection
 
@@ -23,6 +26,9 @@ def redirect_url():
 @app.route("/list")
 def lists ():
 	#Display the all Tasks
+	print("=============")
+	print(mongodb_host)
+	print(mongodb_host)
 	todos_l = todos.find()
 	a1="active"
 	return render_template('index.html',a1=a1,todos=todos_l,t=title,h=heading)
