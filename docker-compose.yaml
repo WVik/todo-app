@@ -25,10 +25,12 @@ services:
     volumes:
       - ./data:/app/data
     depends_on:
-      - mongo_db
-  mongo_db:
+      - mongo
+    environment:
+      MONGO_HOST: mongo
+  mongo:
     image: mongo:latest
-    hostname: test_mongodb
+    # hostname: test_mongodb
     volumes:
       - ./data/db:/data/db
     ports:

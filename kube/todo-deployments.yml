@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: todo
-          image: vikramwaradpande/todo-app-flask_app:test
+          image: vikramwaradpande/flask-app:v1
           ports:
             - containerPort: 3000
           resources:

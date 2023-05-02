@@ -6,6 +6,8 @@ spec:
   selector:
     app: todo
   ports:
-    - port: 80
+    - name : http
+      protocol: TCP
+      port: 80
       targetPort: 3000
   type: LoadBalancer

@@ -5,17 +5,17 @@ from bson.errors import InvalidId # For catching InvalidId exception for ObjectI
 import os
 
 mongodb_host = os.environ.get('MONGO_HOST', 'test_mongodb')
-mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
-print("=============")
-print(mongodb_host)
-print(mongodb_host)
-client = MongoClient(host="mongo_db", port=27017)    #Configure the connection to the database
+# mongodb_port = int(os.environ.get('MONGO_PORT', '27017'))
+# print("=============")
+# print(mongodb_host)
+# print(mongodb_host)
+client = MongoClient(host=mongodb_host, port=27017)    #Configure the connection to the database
 db = client.camp2016    #Select the database
 todos = db.todo #Select the collection
 
 app = Flask(__name__)
 title = "TODO with Flask"
-heading = "ToDo Reminder"
+heading = "ToDo Reminder - V2"
 #modify=ObjectId()
 
 def redirect_url():
@@ -26,17 +26,21 @@ def redirect_url():
 @app.route("/list")
 def lists ():
 	#Display the all Tasks
-	print("=============")
-	print(mongodb_host)
-	print(mongodb_host)
+	# print("=============")
+	# print(mongodb_host)
+	# print(mongodb_host)
 	todos_l = todos.find()
 	a1="active"
 	return render_template('index.html',a1=a1,todos=todos_l,t=title,h=heading)
 
+@app.route("/health")
+def healthCheck ():
+	return "Success", 200,
+
 @app.route("/")
 @app.route("/uncompleted")
 def tasks ():
-	print("I'm here")
+	print("I'm here now")
 	#Display the Uncompleted Tasks
 	todos_l = todos.find({"done":"no"})
 	a2="active"
